@@ -46,10 +46,7 @@ static bool IsBluetoothDevice(const libusb_device_descriptor& descriptor)
   // Some devices misreport their class, so we avoid relying solely on descriptor checks and allow
   // users to specify their own VID/PID.
   return BluetoothRealDevice::IsConfiguredBluetoothDevice(descriptor.idVendor,
-                                                          descriptor.idProduct) ||
-         (descriptor.bDeviceClass == LIBUSB_CLASS_WIRELESS &&
-          descriptor.bDeviceSubClass == SUBCLASS &&
-          descriptor.bDeviceProtocol == PROTOCOL_BLUETOOTH);
+                                                          descriptor.idProduct);
 }
 
 BluetoothRealDevice::BluetoothRealDevice(EmulationKernel& ios, const std::string& device_name)
