@@ -37,6 +37,8 @@ modules:
           project-id: 20540
           stable-only: true
           url-template: https://www.freedesktop.org/software/libevdev/libevdev-$version.tar.xz
+    post-install:
+      - ln -s /app/include/libevdev-1.0/libevdev /app/include/libevdev
 
   # build the vendored SDL2 from Externals until the runtime gets 2.30.9
   - SDL2/SDL2.json
@@ -56,6 +58,8 @@ modules:
       - -DENABLE_SDL=ON
       - -DENABLE_EVDEV=ON
       - -DDISTRIBUTOR=dolphin-emu.org
+      - -DLIBEVDEV_INCLUDE_DIR=/app/include
+      - -DCMAKE_INSTALL_RPATH=/app/lib64
     cleanup:
       - /share/man
     post-install:
